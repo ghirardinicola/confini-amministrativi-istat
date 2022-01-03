@@ -60,6 +60,9 @@ Il file `requirements.txt` elenca tutte le dipendenze necessarie a eseguire l'ap
 Si consiglia di operare sempre in un ambiente isolato creando un apposito *virtual environment*.
 Con [pipenv](https://pipenv.kennethreitz.org/en/latest/) è sufficiente entrare nel virtualenv con `pipenv shell` e la prima volta installare le dipendenze con `pipenv install`.
 
+E' necessario avere installato nel sistema (al di fuori dell'ambiente python) sqlite3, l'estensione spatialite ed averla attivata come riportato qui:
+https://www.cafe-encounter.net/p3244/installing-and-using-sqlite-extensions-on-macos-and-maybe-windows-linux-too  
+
 Infine, per eseguire l'applicazione ed elaborare tutte le versioni: `python main.py`. Per specificare una singola versione di interesse: `SOURCE_NAME=YYYYMMDD python main.py`.
 
 ## Come contribuire
