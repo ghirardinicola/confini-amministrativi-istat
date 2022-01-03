@@ -56,7 +56,14 @@ for source in sources["istat"]:  # noqa: C901
         # ... la crea
         output_zip.mkdir(parents=True, exist_ok=True)
         # Scarico il file dal sito ISTAT
-        with urlopen(source["url"]) as res:
+        # Workaround per certificate chain non completa di istat.it
+        import ssl
+        output_shp.mkdir(parents=True, exist_ok=True) 
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+
+        with urlopen(source["url"], context=ctx) as res:
             # Lo leggo come archivio zip
             with ZipFile(BytesIO(res.read())) as zfile:
                 # Ciclo su ogni file e cartella nell'archivio
