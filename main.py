@@ -58,7 +58,7 @@ for source in sources["istat"]:  # noqa: C901
         # Scarico il file dal sito ISTAT
         # Workaround per certificate chain non completa di istat.it
         import ssl
-        output_shp.mkdir(parents=True, exist_ok=True) 
+        #output_shp.mkdir(parents=True, exist_ok=True) 
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
@@ -280,13 +280,13 @@ for source in sources["istat"]:  # noqa: C901
     output_geojson = Path(OUTPUT_DIR, source["name"], "geojson")
     output_geopkg = Path(OUTPUT_DIR, source["name"], "geopkg")
     output_topojson = Path(OUTPUT_DIR, source["name"], "topojson")
-    output_geobuf = Path(OUTPUT_DIR, source["name"], "geobuf")
+    #output_geobuf = Path(OUTPUT_DIR, source["name"], "geobuf")
 
     # Le creo se non esistono
     output_geojson.mkdir(parents=True, exist_ok=True)
     output_geopkg.mkdir(parents=True, exist_ok=True)
     output_topojson.mkdir(parents=True, exist_ok=True)
-    output_geobuf.mkdir(parents=True, exist_ok=True)
+    #output_geobuf.mkdir(parents=True, exist_ok=True)
 
     # Ciclo su tutti gli shapefile
     for shp_filename in output_shp.glob("**/*.shp"):
@@ -335,6 +335,8 @@ for source in sources["istat"]:  # noqa: C901
             # Salvo il file
             with open(topojson_filename, "w") as f:
                 f.write(tj.to_json())
+
+        logging.info("End Processing {}...".format(source["name"]))
 
         # Geobuf - https://github.com/pygeobuf/pygeobuf
         # File di output
