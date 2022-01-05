@@ -320,23 +320,23 @@ for source in sources["istat"]:  # noqa: C901
             # Converto in GEOJSON e salvo il file
             gdf.to_file(geopkg_filename, driver="GPKG")
 
-        # Topojson - https://github.com/topojson/topojson
-        # File di output
-        topojson_filename = Path(
-            output_topojson, *shp_filename.parts[3 if OUTPUT_DIR else 2 :]
-        ).with_suffix(".json")
-        # Se non esiste...
-        if not topojson_filename.exists():
-            logging.info("-- topojson")
-            # ... ne creo il percorso
-            topojson_filename.parent.mkdir(parents=True, exist_ok=True)
-            # Carico e converto il GEOJSON in TOPOJSON
-            tj = topojson.Topology(gdf, prequantize=False, topology=True)
-            # Salvo il file
-            with open(topojson_filename, "w") as f:
-                f.write(tj.to_json())
+        # # Topojson - https://github.com/topojson/topojson
+        # # File di output
+        # topojson_filename = Path(
+        #     output_topojson, *shp_filename.parts[3 if OUTPUT_DIR else 2 :]
+        # ).with_suffix(".json")
+        # # Se non esiste...
+        # if not topojson_filename.exists():
+        #     logging.info("-- topojson")
+        #     # ... ne creo il percorso
+        #     topojson_filename.parent.mkdir(parents=True, exist_ok=True)
+        #     # Carico e converto il GEOJSON in TOPOJSON
+        #     tj = topojson.Topology(gdf, prequantize=False, topology=True)
+        #     # Salvo il file
+        #     with open(topojson_filename, "w") as f:
+        #         f.write(tj.to_json())
 
-        logging.info("End Processing {}...".format(source["name"]))
+    logging.info("End Processing {}...".format(source["name"]))
 
         # Geobuf - https://github.com/pygeobuf/pygeobuf
         # File di output
